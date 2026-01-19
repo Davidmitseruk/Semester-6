@@ -47,3 +47,45 @@ export const Llogin = () => {
 }
 
 
+// 3
+
+//https://gomerch.it/products?name=hoodie&color=orange&maxPrice=500
+
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import Analitycs from 'to/analitycs-service';
+
+const App = () => {
+  const location = useLocation();
+  useEffect(() => {Analitycs.send(location)}, [location])
+
+  return <div>...</div>
+}
+
+
+
+
+//const Products = () => {
+
+//  const location = useLocation();
+
+//  return <Link to={location.state.from}>
+//  Product 1 </Link>
+//}
+
+const Products = () => {
+
+  const location = useLocation();
+
+  return <Link state={{from:location}} to="/products/hoodie-1">
+  Product 1 </Link>
+}
+
+//{
+//   "pathname": "/products",
+//   "search": "?name=hoodie&color=orange&maxPrice=500",
+//   "hash": "",
+//   "state": null,
+//   "key": "random-browser-gen-id"
+//}
+
