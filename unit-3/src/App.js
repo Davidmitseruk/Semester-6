@@ -97,16 +97,62 @@
 // ) 
 
 
-const products = [
-    {Name: "apple", Price: 1},
-    {Name: "Banana", Price: 2},
-    {Name: "Kiwi", Price: 3}
-];
+// const products = [
+//     {Name: "apple", Price: 1},
+//     {Name: "Banana", Price: 2},
+//     {Name: "Kiwi", Price: 3}
+// ];
 
-const List = products.map((product, i) => {
-        <div key={i}>
-            {i + 1}. {product.Name} - {product.Price}$ 
+// const List = products.map((product, i) => {
+//         <div key={i}>
+//             {i + 1}. {product.Name} - {product.Price}$ 
+//         </div>
+//         });
+
+// console.log(List)
+
+
+
+// REACTDOM.createPortal(child, container);
+
+
+// const PopOutWindow = () => {
+//     return ReactDOM.createPortal(
+//         <div>Payment succesful</div>, document.querySelector('#popup-root')
+//     )
+// }
+
+
+import React, { Component } from "react";
+import ReactDom from "react-dom";
+
+class MyPortalcomponent extends React.Component{
+    portalContainer = document.createElement('div');
+        ComponentDidMount(){
+            document.body.appendChild(this.portalContainer)
+        }
+
+        componentWillUnmount(){
+            document.body.removeChild(this.portalContainer)
+        }
+
+        render(){
+            return ReactDom.createPortal(this.props.children, this.portalContainer);
+        }
+}
+
+function App(){
+    return(
+        <div>
+            <h1>app content</h1>
+            <MyPortalcomponent>
+                <div>
+                    content in Portal
+                </div>
+            </MyPortalcomponent>
         </div>
-        });
+    );
+}
 
-console.log(List)
+
+ReactDom.render(<App/>, document.getElementById("root"))
